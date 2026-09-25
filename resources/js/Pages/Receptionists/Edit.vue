@@ -48,10 +48,10 @@ function submit() {
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    <h2 class="font-bold text-xl text-white leading-tight">
                         Edit Receptionist: {{ receptionist.name }}
                     </h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p class="text-xs text-slate-400 mt-1">
                         Update receptionist profile details, credentials, or avatar.
                     </p>
                 </div>
@@ -63,9 +63,9 @@ function submit() {
             </div>
         </template>
 
-        <div class="py-8">
-            <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-gray-700">
+        <div class="py-4">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-[#0f172a] shadow-2xl rounded-2xl p-6 sm:p-8 border border-slate-800/80">
                     <form @submit.prevent="submit" class="space-y-6">
                         <!-- Avatar Preview & Upload -->
                         <div>

@@ -43,10 +43,10 @@ function submit() {
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    <h2 class="font-bold text-xl text-white leading-tight">
                         Create Client
                     </h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p class="text-xs text-slate-400 mt-1">
                         Register a new client profile with contact and personal details.
                     </p>
                 </div>
@@ -58,9 +58,9 @@ function submit() {
             </div>
         </template>
 
-        <div class="py-8">
-            <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-gray-700">
+        <div class="py-4">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-[#0f172a] shadow-2xl rounded-2xl p-6 sm:p-8 border border-slate-800/80">
                     <form @submit.prevent="submit" class="space-y-6">
                         <!-- Avatar Preview & Upload -->
                         <div>
@@ -165,10 +165,10 @@ function submit() {
                                 <select
                                     id="gender"
                                     v-model="form.gender"
-                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                                    class="mt-1 block w-full rounded-xl bg-[#131b2e] border border-slate-700/70 text-slate-100 shadow-inner focus:border-emerald-500/70 focus:ring-2 focus:ring-emerald-500/30 text-sm transition-all"
                                 >
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="Male" class="bg-[#0f172a] text-slate-100">Male</option>
+                                    <option value="Female" class="bg-[#0f172a] text-slate-100">Female</option>
                                 </select>
                                 <InputError class="mt-2" :message="form.errors.gender" />
                             </div>

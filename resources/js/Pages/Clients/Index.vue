@@ -37,29 +37,29 @@ const columns = [
             return h('img', {
                 src: url,
                 alt: 'Avatar',
-                class: 'h-10 w-10 rounded-full object-cover border border-gray-200 dark:border-gray-700 shadow-sm',
+                class: 'h-10 w-10 rounded-full object-cover border border-slate-700 shadow-sm',
             })
         },
     }),
     columnHelper.accessor('name', {
         header: 'Name',
-        cell: (info) => h('span', { class: 'font-medium text-gray-900 dark:text-gray-100' }, info.getValue()),
+        cell: (info) => h('span', { class: 'font-semibold text-white' }, info.getValue()),
     }),
     columnHelper.accessor('email', {
         header: 'Email',
-        cell: (info) => h('span', { class: 'text-gray-600 dark:text-gray-300' }, info.getValue()),
+        cell: (info) => h('span', { class: 'text-slate-400' }, info.getValue()),
     }),
     columnHelper.accessor('mobile', {
         header: 'Mobile',
-        cell: (info) => h('span', { class: 'text-gray-600 dark:text-gray-300 text-xs' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'text-slate-400 text-xs font-mono' }, info.getValue() || 'N/A'),
     }),
     columnHelper.accessor('country', {
         header: 'Country',
-        cell: (info) => h('span', { class: 'text-gray-700 dark:text-gray-300' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'text-slate-300 font-medium' }, info.getValue() || 'N/A'),
     }),
     columnHelper.accessor('gender', {
         header: 'Gender',
-        cell: (info) => h('span', { class: 'text-gray-600 dark:text-gray-300 text-xs' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'text-slate-400 text-xs' }, info.getValue() || 'N/A'),
     }),
     columnHelper.accessor('is_approved', {
         header: 'Status',
@@ -67,14 +67,14 @@ const columns = [
             const approved = info.getValue()
             return h('span', {
                 class: approved
-                    ? 'inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300'
-                    : 'inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'
+                    ? 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                    : 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20'
             }, approved ? 'Approved' : 'Pending')
         },
     }),
     columnHelper.accessor('created_at', {
         header: 'Created At',
-        cell: (info) => h('span', { class: 'text-gray-500 dark:text-gray-400 text-xs' }, info.getValue()),
+        cell: (info) => h('span', { class: 'text-slate-400 text-xs' }, info.getValue()),
     }),
     columnHelper.display({
         id: 'actions',
@@ -89,7 +89,7 @@ const columns = [
                         Link,
                         {
                             href: route('clients.edit', client.id),
-                            class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-md transition-colors',
+                            class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 hover:bg-cyan-500/20 rounded-lg transition-colors',
                         },
                         () => 'Edit'
                     )
@@ -103,7 +103,7 @@ const columns = [
                         {
                             type: 'button',
                             onClick: () => openDeleteModal(client),
-                            class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-md transition-colors',
+                            class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 rounded-lg transition-colors',
                         },
                         'Delete'
                     )
@@ -123,10 +123,10 @@ const columns = [
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    <h2 class="font-bold text-xl text-white leading-tight">
                         Manage Clients
                     </h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p class="text-xs text-slate-400 mt-1">
                         View, search, create, update and delete hotel client accounts.
                     </p>
                 </div>
@@ -138,31 +138,29 @@ const columns = [
             </div>
         </template>
 
-        <div class="py-8">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <!-- Flash messages -->
-                <div
-                    v-if="$page.props.flash?.success"
-                    class="p-4 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 text-sm font-medium flex items-center justify-between"
-                >
-                    <span>{{ $page.props.flash.success }}</span>
-                </div>
-                <div
-                    v-if="$page.props.flash?.error"
-                    class="p-4 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 text-sm font-medium flex items-center justify-between"
-                >
-                    <span>{{ $page.props.flash.error }}</span>
-                </div>
-
-                <!-- TanStack Data Table -->
-                <DataTable
-                    :columns="columns"
-                    :data="clients.data"
-                    :pagination="clients"
-                    :search="filters.search"
-                    search-placeholder="Search clients by name, email, phone, country..."
-                />
+        <div class="space-y-6">
+            <!-- Flash messages -->
+            <div
+                v-if="$page.props.flash?.success"
+                class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium flex items-center justify-between shadow-lg"
+            >
+                <span>{{ $page.props.flash.success }}</span>
             </div>
+            <div
+                v-if="$page.props.flash?.error"
+                class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium flex items-center justify-between shadow-lg"
+            >
+                <span>{{ $page.props.flash.error }}</span>
+            </div>
+
+            <!-- TanStack Data Table -->
+            <DataTable
+                :columns="columns"
+                :data="clients.data"
+                :pagination="clients"
+                :search="filters.search"
+                search-placeholder="Search clients by name, email, phone, country..."
+            />
         </div>
 
         <!-- AJAX Delete Modal -->
