@@ -37,29 +37,29 @@ const columns = [
             return h('img', {
                 src: url,
                 alt: 'Avatar',
-                class: 'h-10 w-10 rounded-full object-cover border border-slate-700 shadow-sm',
+                class: 'h-9 w-9 rounded-full object-cover border border-slate-200 shadow-2xs',
             })
         },
     }),
     columnHelper.accessor('name', {
         header: 'Name',
-        cell: (info) => h('span', { class: 'font-semibold text-white' }, info.getValue()),
+        cell: (info) => h('span', { class: 'font-semibold text-slate-900' }, info.getValue()),
     }),
     columnHelper.accessor('email', {
         header: 'Email',
-        cell: (info) => h('span', { class: 'text-slate-400' }, info.getValue()),
+        cell: (info) => h('span', { class: 'text-slate-600' }, info.getValue()),
     }),
     columnHelper.accessor('mobile', {
         header: 'Mobile',
-        cell: (info) => h('span', { class: 'text-slate-400 text-xs font-mono' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'text-slate-600 text-xs font-mono' }, info.getValue() || '—'),
     }),
     columnHelper.accessor('country', {
         header: 'Country',
-        cell: (info) => h('span', { class: 'text-slate-300 font-medium' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'text-slate-700 font-medium' }, info.getValue() || '—'),
     }),
     columnHelper.accessor('gender', {
         header: 'Gender',
-        cell: (info) => h('span', { class: 'text-slate-400 text-xs' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'text-slate-500 text-xs' }, info.getValue() || '—'),
     }),
     columnHelper.accessor('is_approved', {
         header: 'Status',
@@ -67,14 +67,14 @@ const columns = [
             const approved = info.getValue()
             return h('span', {
                 class: approved
-                    ? 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                    : 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                    ? 'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200'
+                    : 'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200'
             }, approved ? 'Approved' : 'Pending')
         },
     }),
     columnHelper.accessor('created_at', {
         header: 'Created At',
-        cell: (info) => h('span', { class: 'text-slate-400 text-xs' }, info.getValue()),
+        cell: (info) => h('span', { class: 'text-slate-500 text-xs' }, info.getValue()),
     }),
     columnHelper.display({
         id: 'actions',
@@ -89,7 +89,7 @@ const columns = [
                         Link,
                         {
                             href: route('clients.edit', client.id),
-                            class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 hover:bg-cyan-500/20 rounded-lg transition-colors',
+                            class: 'inline-flex items-center px-2.5 py-1 text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 hover:text-slate-900 rounded-lg shadow-2xs transition-colors',
                         },
                         () => 'Edit'
                     )
@@ -103,7 +103,7 @@ const columns = [
                         {
                             type: 'button',
                             onClick: () => openDeleteModal(client),
-                            class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 rounded-lg transition-colors',
+                            class: 'inline-flex items-center px-2.5 py-1 text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 hover:bg-rose-100 rounded-lg transition-colors',
                         },
                         'Delete'
                     )
@@ -117,38 +117,38 @@ const columns = [
 </script>
 
 <template>
-    <Head title="Manage Clients" />
+    <Head title="Manage Clients — Grand Horizon" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-white leading-tight">
+                    <h2 class="text-xl font-bold tracking-tight text-slate-900">
                         Manage Clients
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">
-                        View, search, create, update and delete hotel client accounts.
+                    <p class="text-xs text-slate-500 mt-1">
+                        View, search, create, update, and manage hotel guest accounts.
                     </p>
                 </div>
                 <Link :href="route('clients.create')">
                     <PrimaryButton>
-                        + Create Client
+                        + Register Client
                     </PrimaryButton>
                 </Link>
             </div>
         </template>
 
-        <div class="space-y-6">
+        <div class="space-y-4">
             <!-- Flash messages -->
             <div
                 v-if="$page.props.flash?.success"
-                class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium flex items-center justify-between shadow-lg"
+                class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center justify-between shadow-2xs"
             >
                 <span>{{ $page.props.flash.success }}</span>
             </div>
             <div
                 v-if="$page.props.flash?.error"
-                class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium flex items-center justify-between shadow-lg"
+                class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-center justify-between shadow-2xs"
             >
                 <span>{{ $page.props.flash.error }}</span>
             </div>

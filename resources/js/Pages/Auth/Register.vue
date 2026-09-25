@@ -22,12 +22,20 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head title="Register — Grand Horizon Hotel" />
 
-        <form @submit.prevent="submit">
+        <div class="mb-6">
+            <h2 class="text-xl font-bold tracking-tight text-slate-900">
+                Create a guest account
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">
+                Register to reserve luxury suites and manage your hotel stays.
+            </p>
+        </div>
+
+        <form @submit.prevent="submit" class="space-y-4">
             <div>
-                <InputLabel for="name" value="Name" />
-
+                <InputLabel for="name" value="Full Name" />
                 <TextInput
                     id="name"
                     type="text"
@@ -36,14 +44,13 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="name"
+                    placeholder="e.g. John Doe"
                 />
-
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-1.5" :message="form.errors.name" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-
+            <div>
+                <InputLabel for="email" value="Email Address" />
                 <TextInput
                     id="email"
                     type="email"
@@ -51,14 +58,13 @@ const submit = () => {
                     v-model="form.email"
                     required
                     autocomplete="username"
+                    placeholder="john@example.com"
                 />
-
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-1.5" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
+            <div>
+                <InputLabel for="password" value="Password (min 6 characters)" />
                 <TextInput
                     id="password"
                     type="password"
@@ -66,17 +72,13 @@ const submit = () => {
                     v-model="form.password"
                     required
                     autocomplete="new-password"
+                    placeholder="••••••••"
                 />
-
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError class="mt-1.5" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
-
+            <div>
+                <InputLabel for="password_confirmation" value="Confirm Password" />
                 <TextInput
                     id="password_confirmation"
                     type="password"
@@ -84,29 +86,26 @@ const submit = () => {
                     v-model="form.password_confirmation"
                     required
                     autocomplete="new-password"
+                    placeholder="••••••••"
                 />
-
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
+                <InputError class="mt-1.5" :message="form.errors.password_confirmation" />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Already registered?
-                </Link>
-
+            <div class="pt-2">
                 <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
+                    class="w-full justify-center !py-3 !text-sm font-semibold tracking-normal"
                     :disabled="form.processing"
                 >
-                    Register
+                    <span v-if="form.processing">Creating account...</span>
+                    <span v-else>Create Account</span>
                 </PrimaryButton>
+            </div>
+
+            <div class="text-center pt-3 text-xs text-slate-500">
+                Already registered?
+                <Link :href="route('login')" class="font-semibold text-slate-900 hover:underline ms-1">
+                    Sign in here
+                </Link>
             </div>
         </form>
     </GuestLayout>

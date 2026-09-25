@@ -39,7 +39,7 @@ async function confirmDelete() {
     errorMessage.value = ''
 
     try {
-        const response = await axios.delete(props.deleteUrl, {
+        await axios.delete(props.deleteUrl, {
             headers: {
                 Accept: 'application/json',
             },
@@ -68,36 +68,36 @@ function handleClose() {
 <template>
     <Modal :show="show" max-width="md" @close="handleClose">
         <div class="p-6">
-            <div class="flex items-center space-x-3 text-red-400 mb-4">
-                <div class="p-2.5 bg-red-500/10 border border-red-500/20 rounded-xl">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl text-rose-600">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                 </div>
-                <h3 class="text-base font-bold text-white">
+                <h3 class="text-base font-bold text-slate-900">
                     {{ title }}
                 </h3>
             </div>
 
-            <p class="text-xs text-slate-300 mb-2">
+            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
                 {{ message }}
             </p>
 
-            <p v-if="itemTitle" class="text-xs font-semibold text-slate-100 bg-[#131b2e] border border-slate-700/80 p-3 rounded-xl mb-4">
+            <p v-if="itemTitle" class="text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 p-3 rounded-xl mb-4">
                 "{{ itemTitle }}"
             </p>
 
-            <div v-if="errorMessage" class="mb-4 p-3 bg-red-500/10 text-red-300 text-xs rounded-xl border border-red-500/30">
+            <div v-if="errorMessage" class="mb-4 p-3 bg-rose-50 text-rose-700 text-xs rounded-xl border border-rose-200">
                 {{ errorMessage }}
             </div>
 
-            <div class="mt-6 flex justify-end space-x-3">
+            <div class="mt-6 flex justify-end space-x-2.5">
                 <SecondaryButton :disabled="processing" @click="handleClose">
                     Cancel
                 </SecondaryButton>
                 <DangerButton :disabled="processing" @click="confirmDelete">
                     <span v-if="processing">Deleting...</span>
-                    <span v-else>Delete</span>
+                    <span v-else>Confirm Delete</span>
                 </DangerButton>
             </div>
         </div>

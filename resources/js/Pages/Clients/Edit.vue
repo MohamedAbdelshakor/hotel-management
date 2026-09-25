@@ -51,10 +51,10 @@ function submit() {
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-white leading-tight">
+                    <h2 class="font-bold text-xl text-slate-900 leading-tight">
                         Edit Client: {{ client.name }}
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">
+                    <p class="text-xs text-slate-500 mt-1">
                         Update client profile, contact info, credentials, or avatar.
                     </p>
                 </div>
@@ -68,7 +68,7 @@ function submit() {
 
         <div class="py-4">
             <div class="max-w-2xl mx-auto">
-                <div class="bg-[#0f172a] shadow-2xl rounded-2xl p-6 sm:p-8 border border-slate-800/80">
+                <div class="bg-white shadow-2xs rounded-xl p-6 sm:p-8 border border-slate-200">
                     <form @submit.prevent="submit" class="space-y-6">
                         <!-- Avatar Preview & Upload -->
                         <div>
@@ -78,7 +78,7 @@ function submit() {
                                     <img
                                         :src="avatarPreview"
                                         alt="Avatar preview"
-                                        class="h-20 w-20 rounded-full object-cover border-2 border-indigo-200 dark:border-indigo-900 shadow-sm"
+                                        class="h-20 w-20 rounded-full object-cover border border-slate-200 shadow-2xs"
                                     />
                                 </div>
                                 <div>
@@ -86,9 +86,9 @@ function submit() {
                                         type="file"
                                         accept=".jpg,.jpeg,.png,image/jpeg,image/png"
                                         @change="handleAvatarChange"
-                                        class="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 dark:file:bg-indigo-900/30 file:text-indigo-700 dark:file:text-indigo-300 hover:file:bg-indigo-100 dark:hover:file:bg-indigo-900/50 cursor-pointer"
+                                        class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer"
                                     />
-                                    <p class="text-[11px] text-gray-400 mt-1">
+                                    <p class="text-[11px] text-slate-400 mt-1">
                                         Upload a new image to replace current avatar. Max 2MB.
                                     </p>
                                 </div>
@@ -168,10 +168,10 @@ function submit() {
                                 <select
                                     id="gender"
                                     v-model="form.gender"
-                                    class="mt-1 block w-full rounded-xl bg-[#131b2e] border border-slate-700/70 text-slate-100 shadow-inner focus:border-emerald-500/70 focus:ring-2 focus:ring-emerald-500/30 text-sm transition-all"
+                                    class="mt-1 block w-full rounded-lg bg-white border border-slate-300 text-slate-900 shadow-2xs focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition-all"
                                 >
-                                    <option value="Male" class="bg-[#0f172a] text-slate-100">Male</option>
-                                    <option value="Female" class="bg-[#0f172a] text-slate-100">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
                                 </select>
                                 <InputError class="mt-2" :message="form.errors.gender" />
                             </div>
@@ -189,7 +189,7 @@ function submit() {
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center justify-end space-x-3 pt-5 border-t border-slate-200">
                             <Link :href="route('clients.index')">
                                 <SecondaryButton>Cancel</SecondaryButton>
                             </Link>

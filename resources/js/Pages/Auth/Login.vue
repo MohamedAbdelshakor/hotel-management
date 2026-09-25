@@ -31,16 +31,24 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Sign In — Grand Horizon Hotel" />
 
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
+        <div class="mb-6">
+            <h2 class="text-xl font-bold tracking-tight text-slate-900">
+                Sign in to your account
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">
+                Enter your staff credentials or guest account to continue.
+            </p>
+        </div>
+
+        <div v-if="status" class="mb-5 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-medium text-emerald-800">
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="space-y-4">
             <div>
-                <InputLabel for="email" value="Email" />
-
+                <InputLabel for="email" value="Email Address" />
                 <TextInput
                     id="email"
                     type="email"
@@ -49,51 +57,57 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="username"
+                    placeholder="name@hotel.com"
                 />
-
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-1.5" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+            <div>
+                <div class="flex items-center justify-between mb-1.5">
+                    <InputLabel for="password" value="Password" class="!mb-0" />
+                    <Link
+                        v-if="canResetPassword"
+                        :href="route('password.request')"
+                        class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+                    >
+                        Forgot password?
+                    </Link>
+                </div>
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
+                    placeholder="••••••••"
                 />
-
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError class="mt-1.5" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
+            <div class="flex items-center justify-between pt-1">
+                <label class="flex items-center cursor-pointer">
+                    <Checkbox name="remember" v-model:checked="form.remember" class="rounded border-slate-300 text-slate-900 focus:ring-slate-900" />
+                    <span class="ms-2 text-xs font-medium text-slate-600 select-none">Remember this device</span>
                 </label>
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </Link>
-
+            <div class="pt-2">
                 <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
+                    class="w-full justify-center !py-3 !text-sm font-semibold tracking-normal"
                     :disabled="form.processing"
                 >
-                    Log in
+                    <span v-if="form.processing">Signing in...</span>
+                    <span v-else>Sign In</span>
                 </PrimaryButton>
+            </div>
+
+            <div class="text-center pt-3 text-xs text-slate-500">
+                New guest?
+                <Link :href="route('register')" class="font-semibold text-slate-900 hover:underline ms-1">
+                    Create an account
+                </Link>
             </div>
         </form>
     </GuestLayout>

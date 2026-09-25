@@ -42,16 +42,16 @@ function submit() {
 </script>
 
 <template>
-    <Head title="Edit Manager" />
+    <Head title="Edit Manager — Grand Horizon" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-white leading-tight">
+                    <h2 class="font-bold text-xl text-slate-900 leading-tight">
                         Edit Manager: {{ manager.name }}
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">
+                    <p class="text-xs text-slate-500 mt-1">
                         Update manager profile details, credentials, or avatar.
                     </p>
                 </div>
@@ -65,8 +65,8 @@ function submit() {
 
         <div class="py-4">
             <div class="max-w-2xl mx-auto">
-                <div class="bg-[#0f172a] shadow-2xl rounded-2xl p-6 sm:p-8 border border-slate-800/80">
-                    <form @submit.prevent="submit" class="space-y-6">
+                <div class="bg-white shadow-2xs rounded-xl p-6 sm:p-8 border border-slate-200">
+                    <form @submit.prevent="submit" class="space-y-5">
                         <!-- Avatar Preview & Upload -->
                         <div>
                             <InputLabel value="Avatar Image (Optional - JPG, JPEG)" />
@@ -75,7 +75,7 @@ function submit() {
                                     <img
                                         :src="avatarPreview"
                                         alt="Avatar preview"
-                                        class="h-20 w-20 rounded-full object-cover border-2 border-indigo-200 dark:border-indigo-900 shadow-sm"
+                                        class="h-16 w-16 rounded-full object-cover border-2 border-slate-200 shadow-2xs"
                                     />
                                 </div>
                                 <div>
@@ -83,14 +83,14 @@ function submit() {
                                         type="file"
                                         accept=".jpg,.jpeg,image/jpeg"
                                         @change="handleAvatarChange"
-                                        class="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 dark:file:bg-indigo-900/30 file:text-indigo-700 dark:file:text-indigo-300 hover:file:bg-indigo-100 dark:hover:file:bg-indigo-900/50 cursor-pointer"
+                                        class="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer"
                                     />
-                                    <p class="text-[11px] text-gray-400 mt-1">
+                                    <p class="text-[11px] text-slate-400 mt-1">
                                         Upload a new image to replace current avatar. Max 2MB.
                                     </p>
                                 </div>
                             </div>
-                            <InputError class="mt-2" :message="form.errors.avatar_image" />
+                            <InputError class="mt-1.5" :message="form.errors.avatar_image" />
                         </div>
 
                         <!-- Name -->
@@ -104,7 +104,7 @@ function submit() {
                                 required
                                 autofocus
                             />
-                            <InputError class="mt-2" :message="form.errors.name" />
+                            <InputError class="mt-1.5" :message="form.errors.name" />
                         </div>
 
                         <!-- Email -->
@@ -117,7 +117,7 @@ function submit() {
                                 class="mt-1 block w-full"
                                 required
                             />
-                            <InputError class="mt-2" :message="form.errors.email" />
+                            <InputError class="mt-1.5" :message="form.errors.email" />
                         </div>
 
                         <!-- Password (Optional on update) -->
@@ -130,7 +130,7 @@ function submit() {
                                 class="mt-1 block w-full"
                                 placeholder="••••••••"
                             />
-                            <InputError class="mt-2" :message="form.errors.password" />
+                            <InputError class="mt-1.5" :message="form.errors.password" />
                         </div>
 
                         <!-- National ID -->
@@ -143,11 +143,11 @@ function submit() {
                                 class="mt-1 block w-full font-mono"
                                 required
                             />
-                            <InputError class="mt-2" :message="form.errors.national_id" />
+                            <InputError class="mt-1.5" :message="form.errors.national_id" />
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center justify-end space-x-3 pt-4 border-t border-slate-200">
                             <Link :href="route('admin.managers.index')">
                                 <SecondaryButton>Cancel</SecondaryButton>
                             </Link>

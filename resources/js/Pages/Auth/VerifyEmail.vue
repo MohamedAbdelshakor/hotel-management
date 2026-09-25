@@ -23,38 +23,44 @@ const verificationLinkSent = computed(
 
 <template>
     <GuestLayout>
-        <Head title="Email Verification" />
+        <Head title="Verify Email — Grand Horizon Hotel" />
 
-        <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your
-            email address by clicking on the link we just emailed to you? If you
-            didn't receive the email, we will gladly send you another.
+        <div class="mb-6">
+            <h2 class="text-xl font-bold tracking-tight text-slate-900">
+                Verify your email address
+            </h2>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Thank you for registering! Please check your email inbox and click the verification link to activate your account.
+            </p>
         </div>
 
         <div
-            class="mb-4 text-sm font-medium text-green-600"
+            class="mb-5 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-medium text-emerald-800"
             v-if="verificationLinkSent"
         >
-            A new verification link has been sent to the email address you
-            provided during registration.
+            A fresh verification link has been sent to your registered email address.
         </div>
 
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
+        <form @submit.prevent="submit" class="space-y-4">
+            <div>
                 <PrimaryButton
-                    :class="{ 'opacity-25': form.processing }"
+                    class="w-full justify-center !py-3 !text-sm font-semibold tracking-normal"
                     :disabled="form.processing"
                 >
-                    Resend Verification Email
+                    <span v-if="form.processing">Sending email...</span>
+                    <span v-else>Resend Verification Email</span>
                 </PrimaryButton>
+            </div>
 
+            <div class="text-center pt-2">
                 <Link
                     :href="route('logout')"
                     method="post"
                     as="button"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >Log Out</Link
+                    class="text-xs font-semibold text-slate-600 hover:text-slate-900"
                 >
+                    Sign Out
+                </Link>
             </div>
         </form>
     </GuestLayout>

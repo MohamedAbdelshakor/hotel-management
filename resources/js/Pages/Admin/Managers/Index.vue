@@ -37,25 +37,25 @@ const columns = [
             return h('img', {
                 src: url,
                 alt: 'Avatar',
-                class: 'h-10 w-10 rounded-full object-cover border border-slate-700 shadow-sm',
+                class: 'h-9 w-9 rounded-full object-cover border border-slate-200 shadow-2xs',
             })
         },
     }),
     columnHelper.accessor('name', {
         header: 'Name',
-        cell: (info) => h('span', { class: 'font-semibold text-white' }, info.getValue()),
+        cell: (info) => h('span', { class: 'font-semibold text-slate-900' }, info.getValue()),
     }),
     columnHelper.accessor('email', {
         header: 'Email',
-        cell: (info) => h('span', { class: 'text-slate-400' }, info.getValue()),
+        cell: (info) => h('span', { class: 'text-slate-600' }, info.getValue()),
     }),
     columnHelper.accessor('national_id', {
         header: 'National ID',
-        cell: (info) => h('span', { class: 'font-mono text-xs bg-[#131b2e] border border-slate-700/80 px-2.5 py-1 rounded-md text-slate-300' }, info.getValue() || 'N/A'),
+        cell: (info) => h('span', { class: 'font-mono text-xs bg-slate-100 border border-slate-200 px-2 py-0.5 rounded text-slate-700' }, info.getValue() || '—'),
     }),
     columnHelper.accessor('created_at', {
         header: 'Created At',
-        cell: (info) => h('span', { class: 'text-slate-400 text-xs' }, info.getValue()),
+        cell: (info) => h('span', { class: 'text-slate-500 text-xs' }, info.getValue()),
     }),
     columnHelper.display({
         id: 'actions',
@@ -67,7 +67,7 @@ const columns = [
                     Link,
                     {
                         href: route('admin.managers.edit', manager.id),
-                        class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 rounded-lg transition-colors',
+                        class: 'inline-flex items-center px-2.5 py-1 text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 hover:text-slate-900 rounded-lg shadow-2xs transition-colors',
                     },
                     () => 'Edit'
                 ),
@@ -76,7 +76,7 @@ const columns = [
                     {
                         type: 'button',
                         onClick: () => openDeleteModal(manager),
-                        class: 'inline-flex items-center px-2.5 py-1.5 text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 rounded-lg transition-colors',
+                        class: 'inline-flex items-center px-2.5 py-1 text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 hover:bg-rose-100 rounded-lg transition-colors',
                     },
                     'Delete'
                 ),
@@ -87,38 +87,38 @@ const columns = [
 </script>
 
 <template>
-    <Head title="Manage Managers" />
+    <Head title="Manage Managers — Grand Horizon" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-xl text-white leading-tight">
+                    <h2 class="text-xl font-bold tracking-tight text-slate-900">
                         Manage Managers
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">
-                        View, search, create, update and delete hotel managers.
+                    <p class="text-xs text-slate-500 mt-1">
+                        View, search, create, update, and manage hotel manager accounts.
                     </p>
                 </div>
                 <Link :href="route('admin.managers.create')">
                     <PrimaryButton>
-                        + Create Manager
+                        + Add Manager
                     </PrimaryButton>
                 </Link>
             </div>
         </template>
 
-        <div class="space-y-6">
+        <div class="space-y-4">
             <!-- Flash messages -->
             <div
                 v-if="$page.props.flash?.success"
-                class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium flex items-center justify-between shadow-lg"
+                class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center justify-between shadow-2xs"
             >
                 <span>{{ $page.props.flash.success }}</span>
             </div>
             <div
                 v-if="$page.props.flash?.error"
-                class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium flex items-center justify-between shadow-lg"
+                class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-center justify-between shadow-2xs"
             >
                 <span>{{ $page.props.flash.error }}</span>
             </div>
@@ -137,7 +137,7 @@ const columns = [
         <ConfirmDeleteModal
             :show="deleteModalOpen"
             title="Delete Manager"
-            message="Are you sure you want to delete this manager? This will permanently remove their account."
+            message="Are you sure you want to delete this manager? This will permanently remove their access."
             :item-title="managerToDelete?.name"
             :delete-url="managerToDelete ? route('admin.managers.destroy', managerToDelete.id) : ''"
             @close="deleteModalOpen = false"
