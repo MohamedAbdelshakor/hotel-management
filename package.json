@@ -22,5 +22,10 @@
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1"
+    },
+    "dependencies": {
+        "@lucide/vue": "^1.48.0",
+        "@tanstack/vue-table": "^8.21.3",
+        "lucide-vue-next": "^1.0.0"
     }
 }

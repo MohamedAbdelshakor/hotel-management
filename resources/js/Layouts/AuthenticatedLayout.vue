@@ -39,6 +39,27 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth?.user?.is_admin"
+                                    :href="route('admin.managers.index')"
+                                    :active="route().current('admin.managers.*')"
+                                >
+                                    Manage Managers
+                                </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth?.user?.is_admin || $page.props.auth?.user?.is_manager"
+                                    :href="route('receptionists.index')"
+                                    :active="route().current('receptionists.*')"
+                                >
+                                    Manage Receptionists
+                                </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth?.user?.is_admin || $page.props.auth?.user?.is_manager"
+                                    :href="route('clients.index')"
+                                    :active="route().current('clients.*')"
+                                >
+                                    Manage Clients
+                                </NavLink>
                             </div>
                         </div>
 
@@ -145,6 +166,27 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth?.user?.is_admin"
+                            :href="route('admin.managers.index')"
+                            :active="route().current('admin.managers.*')"
+                        >
+                            Manage Managers
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth?.user?.is_admin || $page.props.auth?.user?.is_manager"
+                            :href="route('receptionists.index')"
+                            :active="route().current('receptionists.*')"
+                        >
+                            Manage Receptionists
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth?.user?.is_admin || $page.props.auth?.user?.is_manager"
+                            :href="route('clients.index')"
+                            :active="route().current('clients.*')"
+                        >
+                            Manage Clients
                         </ResponsiveNavLink>
                     </div>
 

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReceptionistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,12 +28,17 @@ Route::middleware('auth')->group(function () {
 
     // Admin routes
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
-        // Stage 4: Manage Managers
+        Route::resource('managers', ManagerController::class);
     });
 
     // Manager & Admin routes
     Route::middleware('role:admin|manager')->group(function () {
         // Stage 5: Manage Receptionists & Clients
+        Route::post('receptionists/{receptionist}/ban', [ReceptionistController::class, 'ban'])->name('receptionists.ban');
+        Route::post('receptionists/{receptionist}/unban', [ReceptionistController::class, 'unban'])->name('receptionists.unban');
+        Route::resource('receptionists', ReceptionistController::class);
+        Route::resource('clients', ClientController::class);
+
         // Stage 6: Manage Floors
         // Stage 7: Manage Rooms
         // Stage 13: Statistics
